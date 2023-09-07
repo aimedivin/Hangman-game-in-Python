@@ -9,7 +9,7 @@ s_words = ['apple','banana','car','dog','elephant','fish','guitar','house',
         'quilt','rainbow','star','tiger','butterfly','candle','diamond','fireworks',
         'giraffe','hen','island','jungle','kangaroo','lighthouse']
 
-word = s_words[random.randint(0,29)]
+word = s_words[random.randint(0, 29)]
 loop = len(word)
 new_word = []
 used_letter = []
@@ -21,22 +21,35 @@ while loop > 0:
     loop -= 1
 
 def info_update():
-    print("---------------------------------------------------------------------------------------")
-    print("|  Word","".join(str(i) for i in new_word), )
+    print("------------------------------------------------------------------------------------------")
+    print("|  Word ","".join(str(i) for i in new_word), )
     print(f"|  Guesses remaing: {guess}")
     print(f"|  Letters not used: {', '.join(i for i in string.ascii_lowercase if i not in used_letter)}")
-    print("---------------------------------------------------------------------------------------  \n")
+    print("------------------------------------------------------------------------------------------  \n")
 
 def letter_check_1(chr):
     global warning
-    if chr in string.ascii_lowercase :
+    global guess
+    if chr in string.ascii_lowercase or char == ' ' :
         if chr in used_letter:
+            if warning == 0:
+                guess -= 1
+                return False
             warning = warning - 1
-
+            return False
+        return True
+    
     else:
-        print("Invalid Input")
-        if not g_w_check():
-            end()
+        print("Invalid Input, please enter a valid letter")
+        
+        if warning == 0:
+            guess -= 1
+        else:
+            if chr in used_letter:
+                warning -= 1
+        return False
+        
+
 
 def letter_check_2(chr, secret_word):
     global guess
@@ -49,53 +62,50 @@ def letter_check_2(chr, secret_word):
             count += 1
         return index_list
     else:
+        print("Incorrect guess")
         if chr not in "aiueo":
             guess -= 1
         else:
             guess -= 2
             return[]
 
-def g_w_check():
+def guess_check():
     if guess > 0 :
-        if warning == 0:
-            return False
         return True
     return False
 
 def end():
-    print('you loose')
+    if not (guess_check()):
+        print("You loose!")
+    if breaker == len(new_word):
+        score = guess * len(set(new_word))
+        print(f"Congratulations, You Won!\nYour score: {score}")
     
 
 print("--- Hello! Welcome to Hangman Game ---")
 print("You know the rules for the game")
 print("You must Enter one character at a time\n\n ------ Let's Start ------\n")
 
-#info updates
-info_update()
-
 
 
 while breaker != len(new_word) :
-    if g_w_check():
-        char = input("Enter any letter for the guess: ")
-        used_letter.append(char)
-        letter_check_1(char)
-        index = letter_check_2(char, word)
-        print(index,'\n')
-
-        if index:
-            count = 0
-            for i in word:
-                if count in index:
-                    new_word[count] = char
-                    breaker += 1
-                    count += 1
-                    continue
-                count += 1
-
+    if guess_check():
         info_update()
+        char = input("Enter any letter for the guess: ")
+        if letter_check_1(char):
+            index = letter_check_2(char, word)
+
+            if index:
+                count = 0
+                for i in word:
+                    if count in index and char not in used_letter:
+                        new_word[count] = char
+                        breaker += 1
+                        count += 1
+                        continue
+                    count += 1
+        used_letter.append(char)
     else:
         break
 
-
-print('\n Thanks For Playing')
+end()

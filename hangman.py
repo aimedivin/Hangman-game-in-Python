@@ -1,8 +1,8 @@
 #Names For Members 
 
-#IHIMBAZWE Igor      | Reg No:
-#IKIREZE Dina        | Reg No:
-#IRAGENA Aime Divin  | Reg No: 223015506
+# IHIMBAZWE Igor      | Reg No: 223006775
+# IKIREZE Dina        | Reg No: 223014467
+# IRAGENA Aime Divin  | Reg No: 223015506
 
 
 import random
@@ -17,13 +17,14 @@ s_words = ['apple','banana','car','dog','elephant','fish','guitar','house',
         'quilt','rainbow','star','tiger','butterfly','candle','diamond','fireworks',
         'giraffe','hen','island','jungle','kangaroo','lighthouse']
 
-#initial assignments
+#initial assignments 
 word = s_words[random.randint(0, 29)]
 loop = len(word)
 new_word = []
 used_letter = []
 breaker = 0
 
+# building up dashed(-) word of same length as orginal 
 while loop > 0:
     new_word.append('-')
     loop -= 1
@@ -56,8 +57,6 @@ def letter_check_1(chr):
             if chr in used_letter:
                 warning -= 1
         return False
-        
-
 
 def letter_check_2(chr, secret_word):
     global guess

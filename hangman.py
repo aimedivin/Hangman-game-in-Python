@@ -1,7 +1,7 @@
 #Names For Members 
 
 # IHIMBAZWE Igor      | Reg No: 223006775
-# IKIREZE Dina        | Reg No: 223014467
+# IKIREZI Dina        | Reg No: 223014467
 # IRAGENA Aime Divin  | Reg No: 223015506
 
 
@@ -54,8 +54,7 @@ def letter_check_1(chr):
         if warning == 0:
             guess -= 1
         else:
-            if chr in used_letter:
-                warning -= 1
+            warning -= 1
         return False
 
 def letter_check_2(chr, secret_word):

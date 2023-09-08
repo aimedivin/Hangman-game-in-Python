@@ -24,7 +24,7 @@ new_word = []
 used_letter = []
 breaker = 0
 
-# building up dashed(-) word of same length as orginal 
+# building up dashed(-) word of same length as original 
 while loop > 0:
     new_word.append('-')
     loop -= 1

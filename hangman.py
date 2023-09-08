@@ -1,7 +1,8 @@
 #Names For Members 
+
 #IHIMBAZWE Igor      | Reg No:
 #IKIREZE Dina        | Reg No:
-#IRAGENA Aime Divin  | Reg No:
+#IRAGENA Aime Divin  | Reg No: 223015506
 
 
 import random
@@ -10,11 +11,13 @@ import string
 guess = 6
 warning = 3
 
+# Words to be guessed
 s_words = ['apple','banana','car','dog','elephant','fish','guitar','house',
         'ice cream','jump','kite','lemon','mountain','notebook','orange','piano',
         'quilt','rainbow','star','tiger','butterfly','candle','diamond','fireworks',
         'giraffe','hen','island','jungle','kangaroo','lighthouse']
 
+#initial assignments
 word = s_words[random.randint(0, 29)]
 loop = len(word)
 new_word = []
@@ -27,7 +30,7 @@ while loop > 0:
 
 def info_update():
     print("------------------------------------------------------------------------------------------")
-    print("|  Word ","".join(str(i) for i in new_word), )
+    print("|  Word: ","".join(str(i) for i in new_word), )
     print(f"|  Guesses remaing: {guess}")
     print(f"|  Letters not used: {', '.join(i for i in string.ascii_lowercase if i not in used_letter)}")
     print("------------------------------------------------------------------------------------------  \n")
@@ -35,7 +38,7 @@ def info_update():
 def letter_check_1(chr):
     global warning
     global guess
-    if chr in string.ascii_lowercase or char == ' ' :
+    if chr in string.ascii_lowercase or chr == ' ' :
         if chr in used_letter:
             if warning == 0:
                 guess -= 1
@@ -81,17 +84,20 @@ def guess_check():
 
 def end():
     if not (guess_check()):
-        print("You loose!")
+        print(f"\n--- You loose!, You've exhausted your guesses\n--- The word was: {word}")
     if breaker == len(new_word):
         score = guess * len(set(new_word))
-        print(f"Congratulations, You Won!\nYour score: {score}")
+        print(f"\n--- Congratulations, You Won!\n--- The word: {word}\n--- Your score: {score}")
     
 
-print("--- Hello! Welcome to Hangman Game ---")
+# Starter Message
+print("\n--- Hello! Welcome to Hangman Game ---")
 print("You know the rules for the game")
+print("You got 6 Guesses and 3 Warning at start")
 print("You must Enter one character at a time\n\n ------ Let's Start ------\n")
 
 
+# main loop where all logic rotates
 
 while breaker != len(new_word) :
     if guess_check():

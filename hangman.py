@@ -1,3 +1,9 @@
+#Names For Members 
+#IHIMBAZWE Igor      | Reg No:
+#IKIREZE Dina        | Reg No:
+#IRAGENA Aime Divin  | Reg No:
+
+
 import random
 import string
 
@@ -14,7 +20,6 @@ loop = len(word)
 new_word = []
 used_letter = []
 breaker = 0
-print(word)
 
 while loop > 0:
     new_word.append('-')
